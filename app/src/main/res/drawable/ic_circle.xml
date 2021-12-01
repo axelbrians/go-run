@@ -3,9 +3,6 @@
     <item>
         <shape
             android:shape="oval">
-            <size
-                android:width="38dp"
-                android:height="38dp"/>
         </shape>
     </item>
 </selector>

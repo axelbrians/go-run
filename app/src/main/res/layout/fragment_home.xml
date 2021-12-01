@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".view.home.HomeFragment"
     android:layout_marginStart="25dp"
@@ -28,38 +27,38 @@
         android:background="@drawable/im_card"
         android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingVertical="16dp"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_footstep"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingVertical="16dp"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:padding="8dp"
+                android:src="@drawable/ic_footsteps"
+                android:background="@drawable/bg_circle_blue"/>
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/img_footstep"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_footsteps"
-                    android:background="@drawable/bg_circle_blue"/>
-
-                <TextView
-                    android:id="@+id/distance"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="@string/distance"
-                    android:textSize="14sp"
-                    android:textColor="@color/black" />
-                <TextView
-                    android:id="@+id/step_measure"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/gray"
-                    android:text="@string/step_measure"
-                    android:textSize="11sp"/>
-            </LinearLayout>
+            <TextView
+                android:id="@+id/distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/distance"
+                android:textSize="14sp"
+                android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/step_measure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray"
+                android:text="@string/step_measure"
+                android:textSize="11sp"/>
+        </LinearLayout>
         
         <View
             android:layout_width="1dp"
@@ -68,49 +67,39 @@
             android:layout_marginTop="26dp"
             android:layout_marginBottom="25dp"/>
 
-            <RelativeLayout
-                android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingVertical="16dp"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_burned"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:padding="8dp"
+                android:src="@drawable/ic_fire"
+                android:background="@drawable/ic_circle"
+                android:backgroundTint="@color/bg_calories"/>
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/img_calories_background"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/ic_circle"
-                    app:tint="@color/bg_calories" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/img_burned"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/ic_fire"
-                    android:layout_marginStart="7dp"
-                    android:layout_marginTop="7dp"/>
-
-                <TextView
-                    android:id="@+id/burned_calories_val"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/img_calories_background"
-                    android:layout_centerInParent="true"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/calories"
-                    android:textSize="14sp"
-                    android:textColor="@color/black" />
-                <TextView
-                    android:id="@+id/burned_calories"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:textColor="@color/gray"
-                    android:layout_marginTop="28dp"
-                    android:text="@string/burned_calories"
-                    android:textSize="11sp"
-                    android:layout_below="@+id/img_calories_background"/>
-            </RelativeLayout>
+            <TextView
+                android:id="@+id/burned_calories_val"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/calories"
+                android:textSize="14sp"
+                android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/burned_calories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray"
+                android:text="@string/burned_calories"
+                android:textSize="11sp"/>
+        </LinearLayout>
 
         <View
             android:layout_width="1dp"
@@ -119,51 +108,40 @@
             android:layout_marginTop="26dp"
             android:layout_marginBottom="25dp"/>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/img_time_background"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/ic_circle"
-                app:tint="@color/bg_time" />
+            android:layout_weight="1"
+            android:paddingVertical="16dp"
+            android:orientation="vertical"
+            android:gravity="center">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginStart="7dp"
-                android:layout_marginTop="7dp"
-                android:src="@drawable/ic_stopwatch" />
+                android:padding="8dp"
+                android:src="@drawable/ic_stopwatch"
+                android:background="@drawable/ic_circle"
+                android:backgroundTint="@color/bg_time"/>
 
             <TextView
                 android:id="@+id/time_val"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/img_time_background"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="12dp"
                 android:text="@string/time"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-
+                android:textSize="14sp"
+                android:textColor="@color/black" />
             <TextView
                 android:id="@+id/time_measure"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/img_time_background"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="28dp"
-                android:text="@string/time_measure"
                 android:textColor="@color/gray"
-                android:textSize="11sp" />
-        </RelativeLayout>
-        
+                android:text="@string/time_measure"
+                android:textSize="11sp"/>
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>
