@@ -15,4 +15,7 @@
     <color name="line">#BBBBBB</color>
     <color name="orange">#F07846</color>
     <color name="brown">#6B351F</color>
+    <color name="blue">#013880</color>
+    <color name="background">#F9F9F9</color>
+    <color name="red">#FAA7AE</color>
 </resources>
