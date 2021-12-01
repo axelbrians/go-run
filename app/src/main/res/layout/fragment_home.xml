@@ -81,8 +81,7 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:src="@drawable/ic_fire"
-                android:background="@drawable/ic_circle"
-                android:backgroundTint="@color/bg_calories"/>
+                android:background="@drawable/bg_circle_pink"/>
 
             <TextView
                 android:id="@+id/burned_calories_val"
@@ -122,8 +121,7 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:src="@drawable/ic_stopwatch"
-                android:background="@drawable/ic_circle"
-                android:backgroundTint="@color/bg_time"/>
+                android:background="@drawable/bg_circle_yellow"/>
 
             <TextView
                 android:id="@+id/time_val"
