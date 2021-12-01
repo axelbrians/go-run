@@ -1,15 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.home.HomeFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".view.home.HomeFragment"
+    android:layout_marginStart="25dp"
+    android:layout_marginEnd="26dp">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/test"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="34dp"
+        android:layout_marginBottom="13dp"
+        android:text="@string/today_activities"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
-</FrameLayout>
+<!--    Today Activities-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/im_card">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="41dp"
+                android:layout_marginEnd="41dp"
+                android:layout_marginTop="31dp"
+                android:layout_marginBottom="18dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/img_footstep_background"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_circle"
+                    app:tint="@color/bg_footstep" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/img_footstep"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_footsteps"
+                    android:layout_marginStart="7dp"
+                    android:layout_marginTop="7dp"/>
+
+                <TextView
+                    android:id="@+id/distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/img_footstep_background"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/distance"
+                    android:textSize="14sp"
+                    android:textColor="@color/black" />
+                <TextView
+                    android:id="@+id/step_measure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/gray"
+                    android:layout_marginTop="28dp"
+                    android:text="@string/step_measure"
+                    android:textSize="11sp"
+                    android:layout_below="@+id/img_footstep_background"/>
+            </RelativeLayout>
+        
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/line"
+            android:layout_marginTop="26dp"
+            android:layout_marginBottom="25dp"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="21dp"
+                android:layout_marginEnd="21dp"
+                android:layout_marginTop="31dp"
+                android:layout_marginBottom="18dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/img_calories_background"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/ic_circle"
+                    app:tint="@color/bg_calories" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/img_burned"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/ic_fire"
+                    android:layout_marginStart="7dp"
+                    android:layout_marginTop="7dp"/>
+
+                <TextView
+                    android:id="@+id/burned_calories_val"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/img_calories_background"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/calories"
+                    android:textSize="14sp"
+                    android:textColor="@color/black" />
+                <TextView
+                    android:id="@+id/burned_calories"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/gray"
+                    android:layout_marginTop="28dp"
+                    android:text="@string/burned_calories"
+                    android:textSize="11sp"
+                    android:layout_below="@+id/img_calories_background"/>
+            </RelativeLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/line"
+            android:layout_marginTop="26dp"
+            android:layout_marginBottom="25dp"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="39dp"
+            android:layout_marginTop="31dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="18dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_time_background"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/ic_circle"
+                app:tint="@color/bg_time" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="7dp"
+                android:src="@drawable/ic_stopwatch" />
+
+            <TextView
+                android:id="@+id/time_val"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_time_background"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="10dp"
+                android:text="@string/time"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/time_measure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_time_background"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="28dp"
+                android:text="@string/time_measure"
+                android:textColor="@color/gray"
+                android:textSize="11sp" />
+        </RelativeLayout>
+        
+    </LinearLayout>
+
+</LinearLayout>
