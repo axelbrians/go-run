@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,7 +10,6 @@
     android:layout_marginStart="25dp"
     android:layout_marginEnd="26dp">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/test"
         android:layout_width="wrap_content"
@@ -23,40 +23,32 @@
 
 <!--    Today Activities-->
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/im_card">
+        android:background="@drawable/im_card"
+        android:orientation="horizontal">
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="41dp"
-                android:layout_marginEnd="41dp"
-                android:layout_marginTop="31dp"
-                android:layout_marginBottom="18dp">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/img_footstep_background"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_circle"
-                    app:tint="@color/bg_footstep" />
+                android:layout_weight="1"
+                android:paddingVertical="16dp"
+                android:orientation="vertical"
+                android:gravity="center">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/img_footstep"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:padding="8dp"
                     android:src="@drawable/ic_footsteps"
-                    android:layout_marginStart="7dp"
-                    android:layout_marginTop="7dp"/>
+                    android:background="@drawable/bg_circle_blue"/>
 
                 <TextView
                     android:id="@+id/distance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/img_footstep_background"
-                    android:layout_centerInParent="true"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="12dp"
                     android:text="@string/distance"
                     android:textSize="14sp"
                     android:textColor="@color/black" />
@@ -64,13 +56,10 @@
                     android:id="@+id/step_measure"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
                     android:textColor="@color/gray"
-                    android:layout_marginTop="28dp"
                     android:text="@string/step_measure"
-                    android:textSize="11sp"
-                    android:layout_below="@+id/img_footstep_background"/>
-            </RelativeLayout>
+                    android:textSize="11sp"/>
+            </LinearLayout>
         
         <View
             android:layout_width="1dp"
@@ -80,12 +69,9 @@
             android:layout_marginBottom="25dp"/>
 
             <RelativeLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="21dp"
-                android:layout_marginEnd="21dp"
-                android:layout_marginTop="31dp"
-                android:layout_marginBottom="18dp">
+                android:layout_weight="1">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/img_calories_background"
@@ -134,12 +120,9 @@
             android:layout_marginBottom="25dp"/>
 
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="39dp"
-            android:layout_marginTop="31dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="18dp">
+            android:layout_weight="1">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_time_background"
