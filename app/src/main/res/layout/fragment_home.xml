@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".view.home.HomeFragment"
     android:layout_marginStart="25dp"
-    android:layout_marginEnd="26dp">
+    android:layout_marginEnd="26dp"
+    android:orientation="vertical"
+    tools:context=".view.home.HomeFragment">
 
     <TextView
         android:id="@+id/test"
@@ -20,7 +19,7 @@
         android:textSize="18sp"
         android:textStyle="bold" />
 
-<!--    Today Activities-->
+    <!--    Today Activities-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,17 +30,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingVertical="16dp"
+            android:gravity="center"
             android:orientation="vertical"
-            android:gravity="center">
+            android:paddingVertical="16dp">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_footstep"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_circle_blue"
                 android:padding="8dp"
-                android:src="@drawable/ic_footsteps"
-                android:background="@drawable/bg_circle_blue"/>
+                android:src="@drawable/ic_footsteps" />
 
             <TextView
                 android:id="@+id/distance"
@@ -49,39 +48,40 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:text="@string/distance"
-                android:textSize="14sp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
             <TextView
                 android:id="@+id/step_measure"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/gray"
                 android:text="@string/step_measure"
-                android:textSize="11sp"/>
+                android:textColor="@color/gray"
+                android:textSize="11sp" />
         </LinearLayout>
-        
+
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@color/line"
             android:layout_marginTop="26dp"
-            android:layout_marginBottom="25dp"/>
+            android:layout_marginBottom="25dp"
+            android:background="@color/line" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingVertical="16dp"
+            android:gravity="center"
             android:orientation="vertical"
-            android:gravity="center">
+            android:paddingVertical="16dp">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_burned"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_circle_pink"
                 android:padding="8dp"
-                android:src="@drawable/ic_fire"
-                android:background="@drawable/bg_circle_pink"/>
+                android:src="@drawable/ic_fire" />
 
             <TextView
                 android:id="@+id/burned_calories_val"
@@ -89,39 +89,40 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:text="@string/calories"
-                android:textSize="14sp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
             <TextView
                 android:id="@+id/burned_calories"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/gray"
                 android:text="@string/burned_calories"
-                android:textSize="11sp"/>
+                android:textColor="@color/gray"
+                android:textSize="11sp" />
         </LinearLayout>
 
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@color/line"
             android:layout_marginTop="26dp"
-            android:layout_marginBottom="25dp"/>
+            android:layout_marginBottom="25dp"
+            android:background="@color/line" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingVertical="16dp"
+            android:gravity="center"
             android:orientation="vertical"
-            android:gravity="center">
+            android:paddingVertical="16dp">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_circle_yellow"
                 android:padding="8dp"
-                android:src="@drawable/ic_stopwatch"
-                android:background="@drawable/bg_circle_yellow"/>
+                android:src="@drawable/ic_stopwatch" />
 
             <TextView
                 android:id="@+id/time_val"
@@ -129,17 +130,46 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:text="@string/time"
-                android:textSize="14sp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
             <TextView
                 android:id="@+id/time_measure"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/gray"
                 android:text="@string/time_measure"
-                android:textSize="11sp"/>
+                android:textColor="@color/gray"
+                android:textSize="11sp" />
         </LinearLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/start_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/start_button"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingBottom="7dp"
+        android:paddingTop="7dp"
+        android:layout_marginTop="22dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="8dp"
+            android:text="@string/start"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_baseline_send_24"
+            android:contentDescription="@string/start" />
     </LinearLayout>
 
 </LinearLayout>

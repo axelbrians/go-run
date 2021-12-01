@@ -13,4 +13,6 @@
     <color name="bg_time">#F4FDBF</color>
     <color name="gray">#778C95</color>
     <color name="line">#BBBBBB</color>
+    <color name="orange">#F07846</color>
+    <color name="brown">#6B351F</color>
 </resources>
