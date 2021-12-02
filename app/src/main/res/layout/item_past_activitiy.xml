@@ -9,11 +9,11 @@
         android:id="@+id/img_run"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
         android:background="@drawable/bg_circle_red"
-        android:layout_marginTop="22dp"
         android:padding="8dp"
-        android:layout_marginStart="21dp"
         android:src="@drawable/ic_run"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,6 +21,8 @@
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
         android:layout_marginTop="16dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -32,7 +34,6 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
@@ -46,10 +47,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:paddingStart="6dp"
-                android:paddingEnd="0dp"
+                android:layout_marginStart="6dp"
                 android:text="@string/item_distance"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textColor="@color/black"/>
         </LinearLayout>
 
@@ -70,10 +70,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:paddingStart="6dp"
-                android:paddingEnd="0dp"
+                android:layout_marginStart="6dp"
                 android:text="@string/item_cal"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textColor="@color/black"/>
         </LinearLayout>
 
@@ -93,10 +92,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:paddingStart="6dp"
-                android:paddingEnd="0dp"
+                android:layout_marginStart="6dp"
                 android:text="@string/item_time"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textColor="@color/black"/>
         </LinearLayout>
 
@@ -106,12 +104,12 @@
         android:id="@+id/date_history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/date_history"
-        android:textSize="12sp"
-        android:textColor="@color/black"
-        android:layout_marginTop="13dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
         android:paddingBottom="15dp"
+        android:text="@string/date_history"
+        android:textColor="@color/black"
+        android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/img_run"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
