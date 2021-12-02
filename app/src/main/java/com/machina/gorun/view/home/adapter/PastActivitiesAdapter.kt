@@ -41,7 +41,7 @@ class PastActivitiesAdapter : RecyclerView.Adapter<ItemPastActivities>() {
     }
 
     override fun getItemCount(): Int {
-        return 100
+        return 10
     }
 }
 
