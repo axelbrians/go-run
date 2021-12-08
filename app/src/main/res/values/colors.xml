@@ -18,4 +18,8 @@
     <color name="blue">#013880</color>
     <color name="background">#F9F9F9</color>
     <color name="red">#FAA7AE</color>
+    <color name="track_top">#5A5A5A</color>
+    <color name="tosca">#A2F9FF</color>
+    <color name="violet">#F0DAEB</color>
+    <color name="finish">#A7A2A3</color>
 </resources>
