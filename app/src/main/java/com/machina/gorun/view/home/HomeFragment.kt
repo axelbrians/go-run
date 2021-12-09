@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -16,6 +17,7 @@ import com.machina.gorun.data.sources.shared_prefs.LocationSharedPrefs
 import com.machina.gorun.databinding.FragmentHomeBinding
 import com.machina.gorun.view.MainActivity
 import com.machina.gorun.view.home.adapter.PastActivitiesAdapter
+import com.machina.gorun.viewmodels.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -27,8 +29,10 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var pastActivitiesAdapter: PastActivitiesAdapter
+    private val viewModel by viewModels<HomeViewModel>()
 
+
+    private lateinit var pastActivitiesAdapter: PastActivitiesAdapter
     private lateinit var prefsCallback: SharedPreferences.OnSharedPreferenceChangeListener
 
     @Inject lateinit var myHelper: MyHelper
@@ -42,6 +46,7 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         setupView()
+        subscribeToObservables()
         return binding.root
 
     }
@@ -67,7 +72,14 @@ class HomeFragment : Fragment() {
                 }
             }
 
+        viewModel.getJoggingResults()
         resolveBottomButtonState(locationPrefs.isJogging())
+    }
+
+    private fun subscribeToObservables() {
+        viewModel.joggingResults.observe(viewLifecycleOwner) {
+            pastActivitiesAdapter.dataSet = it
+        }
     }
 
     private fun resolveBottomButtonState(isJogging: Boolean) {

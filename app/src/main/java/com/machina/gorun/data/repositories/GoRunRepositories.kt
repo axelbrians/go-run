@@ -1,10 +1,12 @@
 package com.machina.gorun.data.repositories
 
 import android.location.Location
+import com.machina.gorun.data.models.JoggingResult
 import com.machina.gorun.data.models.Point
 import com.machina.gorun.data.models.toFourDecimal
 import com.machina.gorun.data.sources.room.GoRunDao
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -45,18 +47,24 @@ class GoRunRepositories @Inject constructor(
         goRunDao.insertPoint(point)
     }
 
-
-
-    suspend fun computeJoggingResult() {
-        var res = goRunDao.getCurrentPoints()
-//        Timber.d("Collected points $res")
-
-        goRunDao.deletePoints()
-        res = goRunDao.getCurrentPoints()
-//        Timber.d("Collected points $res")
-    }
-
     fun getPoints(): Flow<List<Point>> {
         return goRunDao.getPoints()
+    }
+
+    suspend fun computeJoggingResult() {
+        val res = goRunDao.getCurrentPoints()
+        val joggingResult = JoggingResult(
+            distanceTraveled = res.last().distanceInMeter,
+            caloriesBurned = 0.0,
+            timeElapsed = 0.0,
+            timeStamp = res.first().time
+        )
+
+        goRunDao.insertJoggingResult(joggingResult)
+        goRunDao.deletePoints()
+    }
+
+    fun getJoggingResults(): Flow<List<JoggingResult>> {
+        return goRunDao.getJoggingResults()
     }
 }

@@ -10,15 +10,15 @@ data class JoggingResult(
     val id: Int = 0,
 
     @ColumnInfo(name = "distance_traveled")
-    val distanceTraveled: String,
+    val distanceTraveled: Double,
 
     @ColumnInfo(name = "calories_burdned")
     val caloriesBurned: Double,
 
     @ColumnInfo(name = "time_elapsed")
-    val timeElapsed: String,
+    val timeElapsed: Double,
 
-    @ColumnInfo(name = "date")
-    val date: String
+    @ColumnInfo(name = "timestamp")
+    val timeStamp: Long,
 
 )

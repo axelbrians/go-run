@@ -127,6 +127,7 @@ class ForegroundOnlyLocationService : LifecycleService() {
             override fun onLocationResult(locationResult: LocationResult) {
                 super.onLocationResult(locationResult)
                 val isLocationOn = myHelper.isLocationActive()
+                val isJogging = locationPrefs.isJogging()
                 currentLocation = locationResult.lastLocation
 
 //                Timber.d("new Location at ${currentLocation.toLocation().toString()}")
@@ -145,7 +146,7 @@ class ForegroundOnlyLocationService : LifecycleService() {
 
                 // Updates notification content if this service is running as a foreground
                 // service.
-                if (serviceRunningInForeground) {
+                if (serviceRunningInForeground && isJogging) {
 //                    Timber.d("new notification")
                     notificationManager.notify(
                         NOTIFICATION_ID,

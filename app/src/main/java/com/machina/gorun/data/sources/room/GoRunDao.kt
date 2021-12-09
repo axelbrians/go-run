@@ -2,6 +2,7 @@ package com.machina.gorun.data.sources.room
 
 
 import androidx.room.*
+import com.machina.gorun.data.models.JoggingResult
 import com.machina.gorun.data.models.Point
 import kotlinx.coroutines.flow.Flow
 
@@ -19,4 +20,10 @@ interface GoRunDao {
 
     @Query("SELECT * FROM point_table ORDER BY time")
     fun getPoints(): Flow<List<Point>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertJoggingResult(result: JoggingResult)
+
+    @Query("SELECT * FROM jogging_result_table ORDER BY timestamp")
+    fun getJoggingResults(): Flow<List<JoggingResult>>
 }

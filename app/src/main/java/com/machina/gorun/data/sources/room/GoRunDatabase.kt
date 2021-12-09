@@ -6,7 +6,7 @@ import androidx.room.RoomDatabase
 import com.machina.gorun.data.models.JoggingResult
 import com.machina.gorun.data.models.Point
 
-@Database(entities = [(Point::class), (JoggingResult::class)], version = 2)
+@Database(entities = [(Point::class), (JoggingResult::class)], version = 3)
 abstract class GoRunDatabase : RoomDatabase() {
 
     abstract fun goRunDao(): GoRunDao
