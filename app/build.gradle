@@ -80,4 +80,7 @@ dependencies {
 
     // Logging
     implementation 'com.jakewharton.timber:timber:5.0.1'
+
+    // Google
+    implementation 'com.google.android.gms:play-services-location:18.0.0'
 }

@@ -176,16 +176,17 @@
                     android:id="@+id/fragment_home_search"
                     android:layout_width="0dp"
                     android:layout_height="42dp"
-                    android:layout_marginStart="15dp"
-                    android:textSize="13sp"
+                    android:layout_weight="1"
+                    android:paddingStart="12dp"
                     android:background="@null"
+                    android:layout_gravity="start|center"
                     android:hint="@string/search_here"
+                    android:textSize="15sp"
                     android:textColor="@color/black"
                     android:textColorHint="@color/blue"
-                    android:layout_gravity="start|center"
-                    android:layout_weight="1"
+                    android:inputType="text"
                     android:importantForAutofill="no"
-                    android:inputType="date" />
+                    android:lines="1"/>
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/fragment_home_search_ic"
@@ -234,13 +235,14 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="18dp"
             android:paddingVertical="8dp"
-            android:background="@drawable/start_button"
+            android:background="@drawable/ripple_12_orange"
             android:orientation="horizontal"
             android:gravity="center"
             android:layout_gravity="bottom|center"
             android:layout_marginTop="22dp">
 
             <TextView
+                android:id="@+id/fragment_home_start_button_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
