@@ -25,6 +25,7 @@ import com.machina.gorun.data.models.toText
 import com.machina.gorun.data.repositories.GoRunRepositories
 import com.machina.gorun.data.sources.shared_prefs.LocationSharedPrefs
 import com.machina.gorun.view.MainActivity
+import com.machina.gorun.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -381,7 +382,7 @@ class ForegroundOnlyLocationService : LifecycleService() {
             .setVibrate(LongArray(1))
             .setContentTitle(titleTextNotif)
             .setContentText(mainNotificationText)
-//            .setSmallIcon(R.mipmap.ic_launcher)
+            .setSmallIcon(R.drawable.ic_run)
             .setDefaults(NotificationCompat.DEFAULT_SOUND)
             .setOngoing(true)
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)

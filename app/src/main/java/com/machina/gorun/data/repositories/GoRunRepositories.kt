@@ -53,14 +53,18 @@ class GoRunRepositories @Inject constructor(
 
     suspend fun computeJoggingResult() {
         val res = goRunDao.getCurrentPoints()
-        val joggingResult = JoggingResult(
-            distanceTraveled = res.last().distanceInMeter,
-            caloriesBurned = 0.0,
-            timeElapsed = 0.0,
-            timeStamp = res.first().time
-        )
 
-        goRunDao.insertJoggingResult(joggingResult)
+        if (res.isNotEmpty()) {
+            val joggingResult = JoggingResult(
+                distanceTraveled = res.last().distanceInMeter,
+                caloriesBurned = 0.0,
+                timeElapsed = 0.0,
+                timeStamp = res.first().time
+            )
+
+            goRunDao.insertJoggingResult(joggingResult)
+        }
+
         goRunDao.deletePoints()
     }
 
