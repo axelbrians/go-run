@@ -10,6 +10,7 @@ class UserSharedPrefs(
     companion object {
         private const val PREFS_NAME = "GO_RUN_USER_PREF"
         private const val USER_WEIGHT = "user_weight"
+        private const val USER_HEIGHT = "user_height"
     }
 
      private val prefs: SharedPreferences =
@@ -25,6 +26,17 @@ class UserSharedPrefs(
     fun setUserWeight(weight: Double) {
         with(prefs.edit()) {
             putFloat(USER_WEIGHT, weight.toFloat())
+            apply()
+        }
+    }
+
+    fun getUserHeight(): Double {
+        return prefs.getFloat(USER_HEIGHT, 150F).toDouble()
+    }
+
+    fun setUserHeight(weight: Double) {
+        with(prefs.edit()) {
+            putFloat(USER_HEIGHT, weight.toFloat())
             apply()
         }
     }
