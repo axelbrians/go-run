@@ -26,4 +26,7 @@ interface GoRunDao {
 
     @Query("SELECT * FROM jogging_result_table ORDER BY timestamp DESC")
     fun getJoggingResults(): Flow<List<JoggingResultDto>>
+
+    @Query("SELECT * FROM jogging_result_table ORDER BY timestamp DESC")
+    suspend fun getJoggingResultsNoFlow(): List<JoggingResultDto>
 }

@@ -27,8 +27,10 @@ import com.machina.gorun.data.sources.shared_prefs.LocationSharedPrefs
 import com.machina.gorun.view.MainActivity
 import com.machina.gorun.R
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -245,7 +247,13 @@ class ForegroundOnlyLocationService : LifecycleService() {
     override fun onDestroy() {
         Timber.d("onDestroy()")
         locationPrefs.prefs.unregisterOnSharedPreferenceChangeListener(prefsCallback)
-        super.onDestroy()
+        locationPrefs.setIsJogging(false)
+        lifecycleScope.launch(dispatchers.network) {
+            repository.nukePoints()
+            withContext(Dispatchers.Main) {
+                super.onDestroy()
+            }
+        }
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

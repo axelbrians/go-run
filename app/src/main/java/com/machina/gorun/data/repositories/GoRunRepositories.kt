@@ -1,18 +1,24 @@
 package com.machina.gorun.data.repositories
 
 import android.location.Location
+import com.machina.gorun.core.DefaultDispatchers
+import com.machina.gorun.core.MyTimeHelper
 import com.machina.gorun.data.models.*
 import com.machina.gorun.data.sources.room.GoRunDao
 import com.machina.gorun.data.sources.shared_prefs.UserSharedPrefs
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import timber.log.Timber
+import java.util.*
 import javax.inject.Inject
 import kotlin.text.Typography.less
 import kotlin.text.Typography.lessOrEqual
 
 class GoRunRepositories @Inject constructor(
     private val goRunDao: GoRunDao,
+    private val dispatchers: DefaultDispatchers,
     private val prefs: UserSharedPrefs
 ) {
 
@@ -37,12 +43,10 @@ class GoRunRepositories @Inject constructor(
 
             val distanceDifference = result[0].toDouble().toFourDecimal()
 
-
             point.distanceInMeter = distanceDifference + last.distanceInMeter
 
 //            Timber.d("last value ${point.distanceInMeter}")
 //            Timber.d("distanceDifference $distanceDifference")
-
 
             val timeDifference = (point.time - last.time) / 1000
             val met = (distanceDifference.meterToMile() / timeDifference.secondToHour()).toMET()
@@ -64,15 +68,15 @@ class GoRunRepositories @Inject constructor(
     }
 
     fun getPoints(): Flow<List<Point>> {
-        return goRunDao.getPoints()
+        return goRunDao.getPoints().flowOn(dispatchers.network)
     }
 
     suspend fun computeJoggingResult() {
         val points = goRunDao.getCurrentPoints()
 
-        val timeElapsed = points.last().time -
-                points.first().time
         if (points.isNotEmpty()) {
+            val timeElapsed = points.last().time -
+                    points.first().time
             val joggingResult = JoggingResultDto(
                 distanceTraveled = points.last().distanceInMeter,
                 caloriesBurned = points.last().calories,
@@ -89,7 +93,87 @@ class GoRunRepositories @Inject constructor(
     fun getJoggingResults(): Flow<List<JoggingResult>> {
         return goRunDao.getJoggingResults().map { resultsDto ->
             resultsDto.map { it.toJoggingResult() }
-        }
+        }.flowOn(dispatchers.network)
+    }
+
+    fun getTodayJoggingResult(): Flow<PastMonthResult> {
+        return flow {
+            val calendar = Calendar.getInstance()
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+            calendar.set(Calendar.MILLISECOND, 0)
+            calendar.set(Calendar.SECOND, 0)
+            calendar.set(Calendar.MINUTE, 0)
+            calendar.set(Calendar.HOUR_OF_DAY, 0)
+
+            val lowerBound = calendar.timeInMillis
+
+            calendar.set(Calendar.SECOND, 59)
+            calendar.set(Calendar.MINUTE, 59)
+            calendar.set(Calendar.HOUR_OF_DAY, 23)
+
+            val upperBound = calendar.timeInMillis
+
+            val joggingResults = goRunDao.getJoggingResultsNoFlow().filter {
+                it.timeStamp in lowerBound..upperBound
+            }
+
+            var distance = 0.0
+            var calories = 0.0
+            var timeElapsed = 0L
+            joggingResults.forEach {
+                distance += it.distanceTraveled
+                calories += it.caloriesBurned
+                timeElapsed += it.timeElapsed
+            }
+
+            emit(PastMonthResult(
+                distance = String.format("%.1f", distance),
+                calories = calories.toFourDecimal().toString(),
+                timeElapsed = MyTimeHelper.formatMillisToMMSS(timeElapsed)
+            ))
+        }.flowOn(dispatchers.network)
+    }
+
+    fun getPastMonthJoggingResult(): Flow<PastMonthResult> {
+        return flow {
+            val calendar = Calendar.getInstance()
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+            calendar.set(Calendar.MILLISECOND, 0)
+            calendar.set(Calendar.SECOND, 0)
+            calendar.set(Calendar.MINUTE, 0)
+            calendar.set(Calendar.HOUR_OF_DAY, 0)
+            calendar.set(Calendar.DAY_OF_MONTH, 1)
+
+            val lowerBound = calendar.timeInMillis
+
+            calendar.set(Calendar.DAY_OF_MONTH, day)
+            calendar.set(Calendar.SECOND, 59)
+            calendar.set(Calendar.MINUTE, 59)
+            calendar.set(Calendar.HOUR_OF_DAY, 23)
+
+            val upperBound = calendar.timeInMillis
+
+            val joggingResults = goRunDao.getJoggingResultsNoFlow().filter {
+                it.timeStamp in lowerBound..upperBound
+            }
+
+            var distance = 0.0
+            var calories = 0.0
+            var timeElapsed = 0L
+            joggingResults.forEach {
+                distance += it.distanceTraveled
+                calories += it.caloriesBurned
+                timeElapsed += it.timeElapsed
+            }
+
+            emit(PastMonthResult(
+                distance = String.format("%.1f", distance),
+                calories = calories.toFourDecimal().toString(),
+                timeElapsed = MyTimeHelper.formatMillisToMMSS(timeElapsed)
+            ))
+        }.flowOn(dispatchers.network)
     }
 
     private fun Double.toMET(): Double {

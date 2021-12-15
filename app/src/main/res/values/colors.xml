@@ -22,4 +22,7 @@
     <color name="tosca">#A2F9FF</color>
     <color name="violet">#F0DAEB</color>
     <color name="finish">#A7A2A3</color>
+
+    <color name="light_grey">#D8D8D8</color>
+    <color name="dark_grey">#696E72</color>
 </resources>

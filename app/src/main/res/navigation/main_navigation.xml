@@ -13,10 +13,18 @@
         <action
             android:id="@+id/action_homeFragment_to_trackingFragment"
             app:destination="@id/trackingFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_overallFragment"
+            app:destination="@id/overallFragment" />
     </fragment>
     <fragment
         android:id="@+id/trackingFragment"
         android:name="com.machina.gorun.view.tracking.TrackingFragment"
         android:label="fragment_tracking"
         tools:layout="@layout/fragment_tracking" />
+    <fragment
+        android:id="@+id/overallFragment"
+        android:name="com.machina.gorun.view.home.OverallFragment"
+        android:label="fragment_overall"
+        tools:layout="@layout/fragment_overall" />
 </navigation>

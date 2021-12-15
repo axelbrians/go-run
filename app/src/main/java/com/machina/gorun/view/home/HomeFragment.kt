@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -52,7 +53,31 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.fragmentHomeSearch.doAfterTextChanged {
+            val query = (it ?: "").toString().lowercase()
 
+            viewModel.searchJoggingResults(query)
+
+            binding.fragmentHomeSearchIc.apply {
+                if (query.isNotEmpty()) {
+                    setImageResource(R.drawable.ic_baseline_clear_24)
+                    setOnClickListener {
+                        binding.fragmentHomeSearch.setText("")
+                    }
+                } else {
+                    setImageResource(R.drawable.ic_baseline_search_24)
+                    setOnClickListener {  }
+                }
+            }
+
+        }
+
+        binding.fragmentHomeTodayActivities.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToOverallFragment()
+            findNavController().navigate(action)
+        }
+
+        viewModel.getTodayJoggingResult()
     }
 
     private fun setupView() {
@@ -79,6 +104,15 @@ class HomeFragment : Fragment() {
     private fun subscribeToObservables() {
         viewModel.joggingResults.observe(viewLifecycleOwner) {
             pastActivitiesAdapter.dataSet = it
+            viewModel.getTodayJoggingResult()
+        }
+
+        viewModel.todayJoggingResult.observe(viewLifecycleOwner) {
+            with(binding) {
+                distance.text = it.distance
+                burnedCaloriesVal.text = it.calories
+                timeVal.text = it.timeElapsed
+            }
         }
     }
 

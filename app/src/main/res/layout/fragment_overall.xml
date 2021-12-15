@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/bg_past"
-    tools:context=".view.home.HomeFragment">
+    tools:context=".view.home.OverallFragment">
 
     <TextView
-        android:id="@+id/today"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="13dp"
         android:layout_marginHorizontal="12dp"
-        android:text="@string/today_activities"
+        android:text="This Month Activities"
         android:textColor="@color/black"
         android:textSize="22sp"
         android:textStyle="bold" />
 
     <!--    Today Activities-->
     <LinearLayout
-        android:id="@+id/fragment_home_today_activities"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="12dp"
-        android:background="@drawable/ripple_overall"
+        android:background="@drawable/im_card"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -37,7 +36,6 @@
             android:paddingVertical="16dp">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/img_footstep"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_circle_blue"
@@ -45,16 +43,15 @@
                 android:src="@drawable/ic_footsteps" />
 
             <TextView
-                android:id="@+id/distance"
+                android:id="@+id/fragment_overall_distance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="@string/distance"
+                tools:text="@string/distance"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/step_measure"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/step_measure"
@@ -78,7 +75,6 @@
             android:paddingVertical="16dp">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/img_burned"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_circle_pink"
@@ -86,16 +82,15 @@
                 android:src="@drawable/ic_fire" />
 
             <TextView
-                android:id="@+id/burned_calories_val"
+                android:id="@+id/fragment_overall_calories"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="@string/calories"
+                tools:text="@string/calories"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/burned_calories"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/burned_calories"
@@ -119,7 +114,6 @@
             android:paddingVertical="16dp">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/img_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_circle_yellow"
@@ -127,141 +121,105 @@
                 android:src="@drawable/ic_stopwatch" />
 
             <TextView
-                android:id="@+id/time_val"
+                android:id="@+id/fragment_overall_time_elapsed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="@string/time"
+                tools:text="@string/time"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/time_measure"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/time_measure"
                 android:textColor="@color/gray"
                 android:textSize="11sp" />
         </LinearLayout>
-
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginHorizontal="12dp"
-        android:text="@string/past_activities"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <FrameLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="12dp"
-        android:background="@drawable/bg_home_recycler">
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="2dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <LinearLayout
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="11dp"
-                android:layout_gravity="end">
-
-                <EditText
-                    android:id="@+id/fragment_home_search"
-                    android:layout_width="0dp"
-                    android:layout_height="42dp"
-                    android:layout_weight="1"
-                    android:paddingStart="12dp"
-                    android:background="@null"
-                    android:layout_gravity="start|center"
-                    android:hint="@string/search_here"
-                    android:textSize="15sp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/blue"
-                    android:inputType="text"
-                    android:importantForAutofill="no"
-                    android:lines="1"/>
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/fragment_home_search_ic"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_baseline_search_24"
-                    android:background="@drawable/ripple_oval_violet"
-                    android:layout_gravity="end|center"/>
-            </LinearLayout>
+                android:layout_marginHorizontal="14dp"
+                android:layout_marginVertical="12dp"
+                android:text="Setting"
+                android:textColor="@color/dark_grey"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/line" />
+                android:background="@color/light_grey" />
 
-            <androidx.core.widget.NestedScrollView
+            <LinearLayout
+                android:id="@+id/fragment_overall_weight_linear_layout"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/fragment_home_recycler"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:overScrollMode="never"
-                        tools:listitem="@layout/item_past_activitiy"
-                        tools:itemCount="2"/>
-
-                    <View
-                        android:layout_width="24dp"
-                        android:layout_height="3dp"
-                        android:layout_marginTop="18dp"
-                        android:layout_marginBottom="72dp"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@android:color/darker_gray"/>
-                </LinearLayout>
-            </androidx.core.widget.NestedScrollView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/fragment_home_start_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="18dp"
-            android:paddingVertical="8dp"
-            android:layout_marginHorizontal="12dp"
-            android:background="@drawable/ripple_12_orange"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_gravity="bottom|center"
-            android:layout_marginTop="22dp">
-
-            <TextView
-                android:id="@+id/fragment_home_start_button_text"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginEnd="8dp"
-                android:text="@string/start"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:background="@drawable/ripple_square_white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="10dp">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_baseline_send_24"
-                android:contentDescription="@string/start" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Body Weight"
+                    android:textColor="@color/dark_grey" />
+
+                <TextView
+                    android:id="@+id/fragment_overall_weight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="55.7 Kg"
+                    android:textColor="@color/dark_grey"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fragment_overall_height_linear_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ripple_square_white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Body Height"
+                    android:textColor="@color/dark_grey" />
+
+                <TextView
+                    android:id="@+id/fragment_overall_height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="166.3 Cm"
+                    android:textColor="@color/dark_grey"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
         </LinearLayout>
-    </FrameLayout>
+    </androidx.cardview.widget.CardView>
+
 </LinearLayout>
