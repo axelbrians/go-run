@@ -1,24 +1,15 @@
 package com.machina.gorun.data.models
 
 import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 
-@Entity(tableName = "jogging_result_table")
-data class JoggingResult(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+class JoggingResult(
+    val id: Int,
 
-    @ColumnInfo(name = "distance_traveled")
-    val distanceTraveled: Double,
+    val distanceTraveled: String,
 
-    @ColumnInfo(name = "calories_burdned")
-    val caloriesBurned: Double,
+    val caloriesBurned: String,
 
-    @ColumnInfo(name = "time_elapsed")
-    val timeElapsed: Double,
+    val timeElapsed: String,
 
-    @ColumnInfo(name = "timestamp")
-    val timeStamp: Long,
-
+    val timeStamp: String,
 )

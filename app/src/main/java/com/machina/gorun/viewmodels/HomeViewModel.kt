@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.machina.gorun.data.models.JoggingResult
+import com.machina.gorun.data.models.JoggingResultDto
 import com.machina.gorun.data.repositories.GoRunRepositories
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn

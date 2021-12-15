@@ -13,6 +13,7 @@ data class Point(
     val latitude: Double,
     val longitude: Double,
     var distanceInMeter: Double,
+    var calories: Double
 )
 
 
@@ -22,7 +23,8 @@ fun Location?.toPoint(): Point? {
             time = this.time,
             latitude = this.latitude.toFourDecimal(),
             longitude = this.longitude.toFourDecimal(),
-            distanceInMeter = 0.0
+            distanceInMeter = 0.0,
+            calories = 0.0
         )
     } else {
         null

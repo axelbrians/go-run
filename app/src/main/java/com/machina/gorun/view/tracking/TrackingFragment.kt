@@ -57,13 +57,20 @@ class TrackingFragment : Fragment() {
         viewModel.currentPoint.observe(viewLifecycleOwner) { point ->
             Timber.d("$point")
 
-            if (point.distanceInMeter > 1000) {
-                binding.fragmentTrackStepMeasure.text = "Km"
-                binding.fragmentTrackDistance.text = String.format("%.1f", point.distanceInMeter / 1000)
-            } else {
-                binding.fragmentTrackStepMeasure.text = "Meters"
-                binding.fragmentTrackDistance.text = String.format("%.1f", point.distanceInMeter)
-            }
+
+            binding.fragmentTrackDistance.text = String.format("%.1f", point.distanceInMeter)
+            binding.fragmentTrackCaloriesBurnedVal.text = point.calories.toString()
+//            if (point.distanceInMeter > 1000) {
+//                binding.fragmentTrackStepMeasure.text = "Km"
+//                binding.fragmentTrackDistance.text = String.format("%.1f", point.distanceInMeter / 1000)
+//            } else {
+//                binding.fragmentTrackStepMeasure.text = "Meters"
+//                binding.fragmentTrackDistance.text = String.format("%.1f", point.distanceInMeter)
+//            }
+        }
+
+        viewModel.timeElapsed.observe(viewLifecycleOwner) { time ->
+            binding.trackingTime.text = time
         }
     }
 

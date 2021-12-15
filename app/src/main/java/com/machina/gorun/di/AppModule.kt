@@ -7,6 +7,7 @@ import com.machina.gorun.core.MyHelper
 import com.machina.gorun.data.sources.room.GoRunDao
 import com.machina.gorun.data.sources.room.GoRunDatabase
 import com.machina.gorun.data.sources.shared_prefs.LocationSharedPrefs
+import com.machina.gorun.data.sources.shared_prefs.UserSharedPrefs
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,6 +33,12 @@ object AppModule {
     fun provideLocationSharedPrefs(
         @ApplicationContext context: Context
     ) = LocationSharedPrefs(context)
+
+    @Singleton
+    @Provides
+    fun provideUserSharedPrefs(
+        @ApplicationContext context: Context
+    ) = UserSharedPrefs(context)
 
 
     private const val GO_RUN_DB_NAME = "go_run_database"

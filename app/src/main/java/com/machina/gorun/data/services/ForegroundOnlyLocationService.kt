@@ -112,6 +112,9 @@ class ForegroundOnlyLocationService : LifecycleService() {
                 Timber.d("isJogging $isJogging")
                 if (isJogging) {
                     subscribeToLocationUpdates()
+                    lifecycleScope.launch(dispatchers.default) {
+                        repository.nukePoints()
+                    }
                 } else {
                     unsubscribeToLocationUpdates()
                     lifecycleScope.launch(dispatchers.default) {

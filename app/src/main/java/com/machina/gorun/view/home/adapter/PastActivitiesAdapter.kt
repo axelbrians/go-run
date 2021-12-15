@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.machina.gorun.data.models.JoggingResult
-import com.machina.gorun.data.models.toFourDecimal
 import com.machina.gorun.databinding.ItemPastActivitiyBinding
 import kotlin.random.Random
 
@@ -55,17 +54,11 @@ class ItemPastActivities(
     private val binding: ItemPastActivitiyBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    private val df: DecimalFormat = DecimalFormat("#.#")
 
     fun onBind(data: JoggingResult) {
-        val firstRandom = Random.nextFloat()
-
-        val distance = df.format(firstRandom * Random.nextInt(200, 2000))
-        val cal = df.format(firstRandom * Random.nextInt(1000, 10000))
-        val time = Random.nextInt(1, 120)
-
-        binding.itemDistance.text = "${String.format("%.1f", data.distanceTraveled)} M"
-        binding.itemCalories.text = "$cal cal"
-        binding.itemTime.text = "$time min"
+        binding.itemDistance.text = data.distanceTraveled
+        binding.itemCalories.text = data.caloriesBurned
+        binding.itemTime.text = data.timeElapsed
+        binding.dateHistory.text = data.timeStamp
     }
 }
