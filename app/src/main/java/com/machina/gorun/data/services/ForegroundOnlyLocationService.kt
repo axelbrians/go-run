@@ -26,9 +26,13 @@ import com.machina.gorun.data.repositories.GoRunRepositories
 import com.machina.gorun.data.sources.shared_prefs.LocationSharedPrefs
 import com.machina.gorun.view.MainActivity
 import com.machina.gorun.R
+import com.machina.gorun.core.MyTimeHelper
+import com.machina.gorun.data.models.Point
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -66,6 +70,7 @@ class ForegroundOnlyLocationService : LifecycleService() {
 
     // We save a local reference to last location to create a Notification if the user navigates away from the app.
     private var currentLocation: Location? = null
+    private var currentPoint: Point? = null
 
     // Data store (in this case, Room database) where the service will persist the location data, injected via Hilt
     @Inject lateinit var repository: GoRunRepositories
@@ -152,37 +157,33 @@ class ForegroundOnlyLocationService : LifecycleService() {
 
                 // Updates notification content if this service is running as a foreground
                 // service.
-                if (serviceRunningInForeground && isJogging) {
+//                if (serviceRunningInForeground && isJogging) {
 //                    Timber.d("new notification")
-                    notificationManager.notify(
-                        NOTIFICATION_ID,
-                        generateNotification(currentLocation)
-                    )
-                }
+//                    notificationManager.notify(
+//                        NOTIFICATION_ID,
+//                        generateNotification(currentPoint)
+//                    )
+//                }
             }
         }
 
-        // Infinite Coroutine Loop to Save Current Location to server
-        lifecycleScope.launch {
-            while (true) {
-                currentLocation?.let {
-                    val isLocationActive = myHelper.isLocationActive()
-                    if (isLocationActive) {
-                        // Uncommnet on production
-//                        homeRepository.storeTracingLocation(LongLat(it.longitude, it.latitude))
-//                            .onEach { }
-//                            .launchIn(lifecycleScope)
-                    } else if (!isLocationActive && serviceRunningInForeground) {
-                        Timber.d("Stopping notification since location is turned off")
-                        unsubscribeToLocationUpdates()
-                    } else {
-//                        Do nothing
-                    }
-                }
-//                myHelper.isLocationEnabled()
-                delay(10000L)
+        repository.getPoints().onEach { points ->
+            val isJogging = locationPrefs.isJogging()
+
+            if (points.isNotEmpty()) {
+                val temp = points.last().time -
+                            points.first().time
+                currentPoint = points.last().copy(time = temp)
             }
-        }
+
+            if (serviceRunningInForeground && isJogging) {
+                notificationManager.notify(
+                    NOTIFICATION_ID,
+                    generateNotification(currentPoint)
+                )
+            }
+        }.launchIn(lifecycleScope)
+
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -235,7 +236,7 @@ class ForegroundOnlyLocationService : LifecycleService() {
         ) {
 
             Timber.d("Start foreground service")
-            val notification = generateNotification(currentLocation)
+            val notification = generateNotification(currentPoint)
             startForeground(NOTIFICATION_ID, notification)
             serviceRunningInForeground = true
         }
@@ -336,7 +337,7 @@ class ForegroundOnlyLocationService : LifecycleService() {
     /*
      * Generates a BIG_TEXT_STYLE Notification that represent latest location.
      */
-    private fun generateNotification(location: Location?): Notification {
+    private fun generateNotification(point: Point?): Notification {
         Timber.d("generateNotification()")
 
         // Main steps for building a BIG_TEXT_STYLE notification:
@@ -347,8 +348,8 @@ class ForegroundOnlyLocationService : LifecycleService() {
         //      4. Build and issue the notification
 
         // 0. Get data
-        val mainNotificationText = location?.toText() ?: "Current point not found."
-        val titleText = "Current point"
+        val mainNotificationText = point?.toText()
+        val titleText = "Current progress"
         val titleTextNotif = "GoRun"
 
         // 1. Create Notification Channel for O+ and beyond devices (26+).

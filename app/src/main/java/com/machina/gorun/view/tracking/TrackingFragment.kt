@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.machina.gorun.R
 import com.machina.gorun.core.MyHelper
 import com.machina.gorun.data.models.toFourDecimal
+import com.machina.gorun.data.models.toTwoDecimal
 import com.machina.gorun.data.sources.shared_prefs.LocationSharedPrefs
 import com.machina.gorun.databinding.FragmentTrackingBinding
 import com.machina.gorun.viewmodels.TrackingViewModel
@@ -58,8 +59,8 @@ class TrackingFragment : Fragment() {
             Timber.d("$point")
 
 
-            binding.fragmentTrackDistance.text = String.format("%.1f", point.distanceInMeter)
-            binding.fragmentTrackCaloriesBurnedVal.text = point.calories.toString()
+            binding.fragmentTrackDistance.text = point.distanceInMeter.toTwoDecimal().toString()
+            binding.fragmentTrackCaloriesBurnedVal.text = point.calories.toTwoDecimal().toString()
 //            if (point.distanceInMeter > 1000) {
 //                binding.fragmentTrackStepMeasure.text = "Km"
 //                binding.fragmentTrackDistance.text = String.format("%.1f", point.distanceInMeter / 1000)

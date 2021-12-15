@@ -4,6 +4,7 @@ import android.location.Location
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import com.machina.gorun.core.MyTimeHelper
 
 @Entity(tableName = "point_table")
 data class Point(
@@ -33,6 +34,20 @@ fun Location?.toPoint(): Point? {
 
 fun Double.toFourDecimal(): Double {
     return String.format("%.4f", this).toDouble()
+}
+
+fun Double.toTwoDecimal(): Double {
+    return String.format("%.2f", this).toDouble()
+}
+
+fun Point?.toText(): String {
+    return if (this != null) {
+        val timeElapsed = MyTimeHelper.formatMillisToMMSS(this.time)
+
+        "${this.distanceInMeter.toTwoDecimal()} meters   |   ${this.calories.toTwoDecimal()} cal   |   $timeElapsed"
+    } else {
+        "Data is not found"
+    }
 }
 
 fun Location?.toText(): String {
