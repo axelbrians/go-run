@@ -25,10 +25,6 @@ class InsertDialog(
         fun onInsert(dialogFragment: DialogFragment, data: String)
     }
 
-    private fun onClick(data: String) {
-        listener.onInsert(this, data)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,8 +34,6 @@ class InsertDialog(
 
         return super.onCreateView(inflater, container, savedInstanceState)
     }
-
-    private var job: Job? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let { activity ->

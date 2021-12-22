@@ -82,6 +82,10 @@ class HomeFragment : Fragment() {
 
     private fun setupView() {
         pastActivitiesAdapter = PastActivitiesAdapter()
+        pastActivitiesAdapter.setOnItemClick { id ->
+            val action = HomeFragmentDirections.actionHomeFragmentToJoggingPathFragment(id)
+            findNavController().navigate(action)
+        }
 
         binding.fragmentHomeRecycler.apply {
             adapter = pastActivitiesAdapter

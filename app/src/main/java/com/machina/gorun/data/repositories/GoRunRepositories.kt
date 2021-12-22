@@ -84,10 +84,31 @@ class GoRunRepositories @Inject constructor(
                 timeStamp = points.first().time
             )
 
-            goRunDao.insertJoggingResult(joggingResult)
+
+            if (joggingResult.distanceTraveled > 0) {
+                goRunDao.insertJoggingResult(joggingResult)
+
+                val foreignKey = goRunDao.getJoggingResultsNoFlow().first().id
+                val joggingPoints = points.map { point ->
+                    JoggingPoint(
+                        joggingResultId = foreignKey,
+                        time = point.time,
+                        latitude = point.latitude,
+                        longitude = point.longitude
+                    )
+                }
+
+                goRunDao.insertAllJoggingPoints(joggingPoints)
+            }
+
+
         }
 
         goRunDao.deletePoints()
+    }
+
+    suspend fun getJoggingPoints(id: Int): List<JoggingPoint> {
+        return goRunDao.getJoggingPointsNoFlow(id)
     }
 
     fun getJoggingResults(): Flow<List<JoggingResult>> {

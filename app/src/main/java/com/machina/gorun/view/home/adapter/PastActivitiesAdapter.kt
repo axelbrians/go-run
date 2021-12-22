@@ -32,6 +32,12 @@ class PastActivitiesAdapter : RecyclerView.Adapter<ItemPastActivities>() {
         get() = differ.currentList
         set(value) = differ.submitList(value)
 
+    private var onItemClick: ((Int) -> Unit)? = null
+
+    fun setOnItemClick(listener: (Int) -> Unit) {
+        onItemClick = listener
+    }
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemPastActivities {
@@ -42,7 +48,7 @@ class PastActivitiesAdapter : RecyclerView.Adapter<ItemPastActivities>() {
     }
 
     override fun onBindViewHolder(holder: ItemPastActivities, position: Int) {
-        holder.onBind(dataSet[position])
+        holder.onBind(dataSet[position], onItemClick)
     }
 
     override fun getItemCount(): Int {
@@ -55,10 +61,14 @@ class ItemPastActivities(
 ) : RecyclerView.ViewHolder(binding.root) {
 
 
-    fun onBind(data: JoggingResult) {
+    fun onBind(data: JoggingResult, onItemClick: ((Int) -> Unit)?) {
         binding.itemDistance.text = data.distanceTraveled
         binding.itemCalories.text = data.caloriesBurned
         binding.itemTime.text = data.timeElapsed
         binding.dateHistory.text = data.timeStamp
+
+        binding.root.setOnClickListener { _ ->
+            onItemClick?.let { it(data.id) }
+        }
     }
 }

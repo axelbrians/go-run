@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_overallFragment"
             app:destination="@id/overallFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_joggingPathFragment"
+            app:destination="@id/joggingPathFragment" />
     </fragment>
     <fragment
         android:id="@+id/trackingFragment"
@@ -27,4 +30,12 @@
         android:name="com.machina.gorun.view.home.OverallFragment"
         android:label="fragment_overall"
         tools:layout="@layout/fragment_overall" />
+    <fragment
+        android:id="@+id/joggingPathFragment"
+        android:name="com.machina.gorun.view.JoggingPathFragment"
+        android:label="fragment_jogging_path"
+        tools:layout="@layout/fragment_jogging_path" >
+        <argument android:name="id"
+            app:argType="integer" />
+    </fragment>
 </navigation>
