@@ -97,7 +97,7 @@ class OverallFragment : Fragment() {
 
 
 
-
+        /*
         lifecycleScope.launch {
             var width = 0
             var height = 0
@@ -208,7 +208,9 @@ class OverallFragment : Fragment() {
             }
 
         }
+        */
     }
+
 
     private fun setupView() {
         revalidateSetting()

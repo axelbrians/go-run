@@ -71,6 +71,10 @@ class GoRunRepositories @Inject constructor(
         return goRunDao.getPoints().flowOn(dispatchers.network)
     }
 
+    suspend fun getJoggingResultById(id: Int): JoggingResult {
+        return goRunDao.getJoggingResultById(id).toJoggingResult()
+    }
+
     suspend fun computeJoggingResult() {
         val points = goRunDao.getCurrentPoints()
 

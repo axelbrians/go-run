@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.geometry.Point
@@ -44,11 +45,14 @@ class JoggingPathFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
+        binding.fragmentJoggingPathBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun setupView() {
         viewModel.getJoggingPoints(args.id)
+        viewModel.getJoggingResultById(args.id)
     }
 
     private fun subscribeToObservables() {
@@ -90,9 +94,9 @@ class JoggingPathFragment : Fragment() {
                     strokeWidth = 10F
                 }
 
-                var maxX = canvasPoints.maxOf { it.x }
+                val maxX = canvasPoints.maxOf { it.x }
                 val minX = canvasPoints.minOf { it.x }
-                var maxY = canvasPoints.maxOf { it.y }
+                val maxY = canvasPoints.maxOf { it.y }
                 val minY = canvasPoints.minOf { it.y }
 
 
@@ -118,9 +122,6 @@ class JoggingPathFragment : Fragment() {
                         point.y + ytransform
                     )
                 }.toMutableList()
-
-//            val offsetX = (maxX + minX) / 2
-//            val offsetY = (maxY + minY) / 2
 
                 val offsetX = width / 2
                 val offsetY = height / 2
@@ -151,14 +152,18 @@ class JoggingPathFragment : Fragment() {
                     }
                 }
 
-//            canvas.drawLine(1f, 1f, 1014f, 825f, mPaint)
-//            val resizedBitmap = Bitmap.createScaledBitmap(bm, maxX.toInt(), maxY.toInt(), false)
-
                 binding.fragmentJoggingPathMap.apply {
                     setImageBitmap(bm)
                 }
             }
 
+        }
+
+        viewModel.joggingResult.observe(viewLifecycleOwner) { res ->
+            binding.fragmentJoggingPathDate.text = res.timeStamp
+            binding.fragmentJoggingPathCaloriesBurned.text = res.caloriesBurned
+            binding.fragmentJoggingPathTimeElapsed.text = res.timeElapsed
+            binding.fragmentJoggingPathDistance.text = res.distanceTraveled
         }
     }
 

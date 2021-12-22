@@ -31,4 +31,11 @@ class JoggingPathViewModel @Inject constructor(
             _joggingPoints.postValue(res)
         }
     }
+
+    fun getJoggingResultById(id: Int) {
+        viewModelScope.launch(dispatchers.network) {
+            val res = repositories.getJoggingResultById(id)
+            _joggingResult.postValue(res)
+        }
+    }
 }

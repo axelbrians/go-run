@@ -25,6 +25,9 @@ interface GoRunDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertJoggingResult(result: JoggingResultDto)
 
+    @Query("SELECT * FROM jogging_result_table WHERE id = :id")
+    suspend fun getJoggingResultById(id: Int): JoggingResultDto
+
     @Query("SELECT * FROM jogging_result_table ORDER BY timestamp DESC")
     fun getJoggingResults(): Flow<List<JoggingResultDto>>
 

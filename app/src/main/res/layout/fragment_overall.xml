@@ -223,16 +223,4 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <ImageView
-        android:id="@+id/test_sphereical"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:padding="18dp"
-        android:scaleType="centerInside"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:background="@color/light_grey"/>
-
 </LinearLayout>
