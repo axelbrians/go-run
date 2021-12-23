@@ -81,6 +81,7 @@ class JoggingPathFragment : Fragment() {
                 points.forEach {
                     canvasPoints.add(sphereProj.toPoint(LatLng(it.latitude, it.longitude)))
                 }
+                points.forEach { Timber.d("${it.latitude}, ${it.longitude}") }
 
                 canvasPoints.forEach { Timber.d(it.toString()) }
 
@@ -112,7 +113,7 @@ class JoggingPathFragment : Fragment() {
                 var ytransform = 0.0
                 if (maxY < height/2) {
                     ytransform = (height / 2 - maxY) + (maxY - midY)
-                } else if (minY > width/2) {
+                } else if (minY > height/2) {
                     ytransform = (height / 2 - minY) + (minY - midY)
                 }
 
@@ -129,17 +130,15 @@ class JoggingPathFragment : Fragment() {
                 val kv = height / (maxY - minY)
                 val kh = width / (maxX - minX)
 
-                val k = maxOf(kv, kh) / 2
-                canvasPoints.forEach { Timber.d(it.toString()) }
+                val k = minOf(kv, kh) / 2
+                canvasPoints.forEach { Timber.d("${it.x}, ${it.y}, ") }
                 canvasPoints = canvasPoints.map { point ->
                     Point(
                         (k * (point.x - offsetX)) + offsetX,
                         (k * (point.y - offsetY)) + offsetY
                     )
                 }.toMutableList()
-                canvasPoints.forEach {
-                    Timber.d("${it.x}, ${it.y}, ")
-                }
+                canvasPoints.forEach { Timber.d("${it.x}, ${it.y}, ") }
                 canvasPoints.forEachIndexed { index, point ->
                     if (index < canvasPoints.size - 1) {
                         canvas.drawLine(
@@ -151,6 +150,10 @@ class JoggingPathFragment : Fragment() {
                         Timber.d("draw line from $index to ${index + 1}")
                     }
                 }
+
+                Timber.d("scale factor $k")
+                Timber.d("xTransform $xtransform")
+                Timber.d("yTransform $ytransform")
 
                 binding.fragmentJoggingPathMap.apply {
                     setImageBitmap(bm)

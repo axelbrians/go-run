@@ -54,9 +54,9 @@ class GoRunRepositories @Inject constructor(
                     timeDifference.secondToMinute()).toFourDecimal()
 
             point.calories = last.calories.toFourDecimal() + addedCalories
-            Timber.d("MET $met")
-            Timber.d("last calories ${last.calories}")
-            Timber.d("added calories $addedCalories")
+//            Timber.d("MET $met")
+//            Timber.d("last calories ${last.calories}")
+//            Timber.d("added calories $addedCalories")
 
 
 //            Timber.d("${last.latitude} ${last.longitude}  ${point.latitude} ${point.longitude} ${result[0]}")

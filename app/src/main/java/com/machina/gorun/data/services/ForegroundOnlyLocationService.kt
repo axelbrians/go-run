@@ -17,6 +17,7 @@ import android.os.Looper
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavDeepLinkBuilder
 import com.google.android.gms.location.*
 import com.machina.gorun.core.DefaultDispatchers
 import com.machina.gorun.core.MyHelper
@@ -371,7 +372,11 @@ class ForegroundOnlyLocationService : LifecycleService() {
             .setBigContentTitle(titleText)
 
         // 3. Set up main Intent/Pending Intents for notification.
-        val launchActivityIntent = Intent(this, MainActivity::class.java)
+//        val launchActivityIntent = Intent(this, MainActivity::class.java)
+        val launchActivityIntent = NavDeepLinkBuilder(this)
+            .setGraph(R.navigation.main_navigation)
+            .setDestination(R.id.trackingFragment)
+            .createPendingIntent()
 
         val cancelIntent = Intent(this, ForegroundOnlyLocationService::class.java)
         cancelIntent.putExtra(EXTRA_CANCEL_LOCATION_TRACKING_FROM_NOTIFICATION, true)
@@ -380,9 +385,9 @@ class ForegroundOnlyLocationService : LifecycleService() {
             this, 0, cancelIntent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
 
-        val activityPendingIntent = PendingIntent.getActivity(
-            this, 0, launchActivityIntent, PendingIntent.FLAG_IMMUTABLE or 0
-        )
+//        val activityPendingIntent = PendingIntent.getActivity(
+//            this, 0, launchActivityIntent, PendingIntent.FLAG_IMMUTABLE or 0
+//        )
 
         // 4. Build and issue the notification.
         // Notification Channel Id is ignored for Android pre O (26).
@@ -408,7 +413,7 @@ class ForegroundOnlyLocationService : LifecycleService() {
 //                "Stop",
 //                servicePendingIntent
 //            )
-            .setContentIntent(activityPendingIntent)
+            .setContentIntent(launchActivityIntent)
             .build()
     }
 
